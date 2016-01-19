@@ -1,6 +1,7 @@
 (set-env!
   :dependencies '[[adzerk/bootlaces              "0.1.13" :scope "test"]
-                  [adzerk/boot-cljs              "1.7.170-3"]
+                  [adzerk/boot-test "1.1.0" :scope "test"]
+                  [adzerk/boot-cljs             "1.7.170-3"]
                   [adzerk/boot-reload            "0.4.2"]
                   [compojure                     "1.4.0"]
                   [org.clojure/clojure           "1.7.0"]
@@ -18,7 +19,8 @@
   '[adzerk.boot-cljs      :refer [cljs]]
   '[adzerk.boot-reload    :refer [reload]]
   '[pandeiro.boot-http    :refer [serve]]
-  '[adzerk.bootlaces      :refer :all])
+  '[adzerk.bootlaces      :refer :all]
+  '[adzerk.boot-test :refer :all])
 
 (def +version+ "0.0.1")
 
@@ -37,6 +39,12 @@
   []
   (comp
    (build-jar)))
+
+(deftask testing
+  "Profile setup for running tests."
+  []
+  (set-env! :source-paths #(conj % "test/clj" "dev-resources"))
+  identity)
 
 (deftask deploy-release
  "Build for release."

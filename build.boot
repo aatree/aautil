@@ -8,8 +8,11 @@
                   [pandeiro/boot-http            "0.7.0"]
                   [ring                          "1.4.0"]
                   [ring/ring-defaults            "0.1.5"]
-                  [adzerk/cljs-console           "0.1.1"]]
-  :resource-paths #{"src/clj" "src/cljs"})
+                  [adzerk/cljs-console           "0.1.1"]
+                  [org.clojure/tools.logging "0.3.1"]
+                  [org.apache.logging.log4j/log4j-core "2.4.1"]
+                  [org.apache.logging.log4j/log4j-slf4j-impl "2.4.1"]]
+  :resource-paths #{"src/clj" "src/cljs" "src/cljc"})
 
 (require
   '[adzerk.boot-cljs      :refer [cljs]]

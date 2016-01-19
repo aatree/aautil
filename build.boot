@@ -48,6 +48,14 @@
   (set-env! :resource-paths #(conj % "dev-resources"))
   identity)
 
+(deftask test-it
+   "Setup, compile and run the tests."
+   []
+   (comp
+     (testing)
+     (cljs)
+     (run-tests)))
+
 (deftask deploy-release
  "Build for release."
  []

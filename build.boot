@@ -38,12 +38,14 @@
   "Build project for development."
   []
   (comp
+   (cljs)
    (build-jar)))
 
 (deftask testing
   "Profile setup for running tests."
   []
-  (set-env! :source-paths #(conj % "test/clj" "dev-resources"))
+  (set-env! :source-paths #(conj % "test/clj"))
+  (set-env! :resource-paths #(conj % "dev-resources"))
   identity)
 
 (deftask deploy-release

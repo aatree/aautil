@@ -5,6 +5,9 @@
                  :cljs [goog.log :as glog]))
     #?(:cljs (:import goog.debug.Console)))
 
+#?(:clj
+   (set! *warn-on-reflection* true))
+
 #?(:cljs
    (def logger
      (glog/getLogger "app")))

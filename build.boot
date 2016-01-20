@@ -13,6 +13,7 @@
                   [ring                          "1.4.0" :scope "test"]
                   [ring/ring-defaults            "0.1.5" :scope "test"]
                   [adzerk/cljs-console           "0.1.1" :scope "test"]]
+  :source-paths #{"test/clj" "dev-resources"}
   :resource-paths #{"src/clj" "src/cljs" "src/cljc"})
 
 (require
@@ -38,21 +39,12 @@
   "Build project for development."
   []
   (comp
-   (cljs)
    (build-jar)))
-
-(deftask testing
-  "Profile setup for running tests."
-  []
-  (set-env! :source-paths #(conj % "test/clj"))
-  (set-env! :resource-paths #(conj % "dev-resources"))
-  identity)
 
 (deftask test-it
    "Setup, compile and run the tests."
    []
    (comp
-     (testing)
      (cljs)
      (run-tests)))
 

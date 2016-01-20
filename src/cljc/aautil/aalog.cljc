@@ -5,6 +5,7 @@
                  :cljs [goog.log :as glog]))
     #?(:cljs (:import goog.debug.Console)))
 
+;small enhancement
 #?(:clj
    (set! *warn-on-reflection* true))
 
@@ -33,9 +34,15 @@
       (apply str (interpose " " (map pr-str msgs))))
 
 (defn info [& s]
-      (let [msg (fmt s)]
-           #?(:clj  (log/info msg)
-              :cljs (glog/info logger msg))))
+  (let [msg (fmt s)]
+    #?(:clj  (log/info msg)
+       :cljs (glog/info logger msg))))
+
+;small enhancement
+(defn warn [& s]
+  (let [msg (fmt s)]
+    #?(:clj  (log/warn msg)
+       :cljs (glog/warning logger msg))))
 
 (defn debug [& s]
       (let [msg (fmt s)]

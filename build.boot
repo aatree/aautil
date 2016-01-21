@@ -1,5 +1,6 @@
 (set-env!
-  :dependencies '[[org.clojure/clojure           "1.7.0"]
+  :dependencies '[[org.clojure/clojure           "1.7.0"  :scope "provided"]
+                  [org.clojure/clojurescript     "1.7.189" :scope "provided"]
                   [org.clojure/tools.logging "0.3.1"]
                   [org.apache.logging.log4j/log4j-core "2.4.1" :scope "test"]
                   [org.apache.logging.log4j/log4j-slf4j-impl "2.4.1" :scope "test"]
@@ -8,7 +9,6 @@
                   [adzerk/boot-cljs             "1.7.170-3" :scope "test"]
                   [adzerk/boot-reload            "0.4.2" :scope "test"]
                   [compojure                     "1.4.0" :scope "test"]
-                  [org.clojure/clojurescript     "1.7.189" :scope "test"]
                   [pandeiro/boot-http            "0.7.0" :scope "test"]
                   [ring                          "1.4.0" :scope "test"]
                   [ring/ring-defaults            "0.1.5" :scope "test"]

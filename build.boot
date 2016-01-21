@@ -1,6 +1,6 @@
 (set-env!
-  :dependencies '[[org.clojure/clojure           "1.7.0"  :scope "provided"]
-                  [org.clojure/clojurescript     "1.7.189" :scope "provided"]
+  :dependencies '[[org.clojure/clojure           "1.8.0"  :scope "provided"]
+                  [org.clojure/clojurescript     "1.7.228" :scope "provided"]
                   [org.clojure/tools.logging "0.3.1"]
                   [org.apache.logging.log4j/log4j-core "2.4.1" :scope "test"]
                   [org.apache.logging.log4j/log4j-slf4j-impl "2.4.1" :scope "test"]

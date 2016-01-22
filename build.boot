@@ -28,7 +28,11 @@
        :description "Snippets of useful code."
        :url         "https://github.com/aatree/aautil"
        :scm         {:url "https://github.com/aatree/aautil"}
-       :license     {"EPL" "http://www.eclipse.org/legal/epl-v10.html"}})
+       :license     {"EPL" "http://www.eclipse.org/legal/epl-v10.html"}}
+  test-cljs {:js-env :phantom
+             :namespaces '#{aautil.simple-test}
+             :update-fs? true
+             :optimizations :none})
 
 (deftask dev
   "Build project for development."
@@ -40,8 +44,8 @@
    "Setup, compile and run the tests."
    []
    (comp
-     (cljs)
-     (test-cljs :update-fs? true :js-env :phantom :namespaces '#{aautil.simple-test})
+;     (cljs :source-map true)
+     (test-cljs)
 ;     (run-tests)
      ))
 

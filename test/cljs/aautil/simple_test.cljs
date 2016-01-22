@@ -1,3 +1,5 @@
-(ns aautil.simple-test)
+(ns aautil.simple-test
+  (:require [cljs.test :refer-macros [deftest is]]))
 
-(println "hi!")
+(deftest x
+  (println "hi!"))

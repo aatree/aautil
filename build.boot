@@ -6,14 +6,16 @@
                   [org.apache.logging.log4j/log4j-slf4j-impl "2.5" :scope "test"]
                   [adzerk/bootlaces                          "0.1.13" :scope "test"]
                   [adzerk/boot-test                          "1.1.0" :scope "test"]
-                  [adzerk/boot-cljs                          "1.7.228-1" :scope "test"]]
-  :source-paths #{"test/clj" "dev-resources"}
+                  [adzerk/boot-cljs                          "1.7.228-1" :scope "test"]
+                  [crisptrutski/boot-cljs-test               "0.2.1" :scope "test"]]
+  :source-paths #{"test/cljs" "test/clj" "dev-resources"}
   :resource-paths #{"src/clj" "src/cljs" "src/cljc"})
 
 (require
-  '[adzerk.boot-cljs      :refer [cljs]]
-  '[adzerk.bootlaces      :refer :all]
-  '[adzerk.boot-test :refer :all])
+  '[adzerk.boot-cljs            :refer [cljs]]
+  '[adzerk.bootlaces            :refer :all]
+  '[adzerk.boot-test            :refer :all]
+  '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
 (def +version+ "0.0.1")
 
@@ -38,7 +40,9 @@
    []
    (comp
      (cljs)
-     (run-tests)))
+     (test-cljs :update-fs? true :js-env :phantom :namespaces '#{aautil.simple-test})
+;     (run-tests)
+     ))
 
 (deftask deploy-release
  "Build for release."

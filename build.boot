@@ -1,25 +1,17 @@
 (set-env!
-  :dependencies '[[org.clojure/clojure           "1.8.0"  :scope "provided"]
-                  [org.clojure/clojurescript     "1.7.228" :scope "provided"]
-                  [org.clojure/tools.logging "0.3.1"]
-                  [org.apache.logging.log4j/log4j-core "2.5" :scope "test"]
+  :dependencies '[[org.clojure/clojure                       "1.8.0"  :scope "provided"]
+                  [org.clojure/clojurescript                 "1.7.228" :scope "provided"]
+                  [org.clojure/tools.logging                 "0.3.1"]
+                  [org.apache.logging.log4j/log4j-core       "2.5" :scope "test"]
                   [org.apache.logging.log4j/log4j-slf4j-impl "2.5" :scope "test"]
-                  [adzerk/bootlaces              "0.1.13" :scope "test"]
-                  [adzerk/boot-test "1.1.0" :scope "test"]
-                  [adzerk/boot-cljs             "1.7.228-1" :scope "test"]
-                  [adzerk/boot-reload            "0.4.4" :scope "test"]
-                  [compojure                     "1.4.0" :scope "test"]
-                  [pandeiro/boot-http            "0.7.0" :scope "test"]
-                  [ring                          "1.4.0" :scope "test"]
-                  [ring/ring-defaults            "0.1.5" :scope "test"]
-                  [adzerk/cljs-console           "0.1.1" :scope "test"]]
+                  [adzerk/bootlaces                          "0.1.13" :scope "test"]
+                  [adzerk/boot-test                          "1.1.0" :scope "test"]
+                  [adzerk/boot-cljs                          "1.7.228-1" :scope "test"]]
   :source-paths #{"test/clj" "dev-resources"}
   :resource-paths #{"src/clj" "src/cljs" "src/cljc"})
 
 (require
   '[adzerk.boot-cljs      :refer [cljs]]
-  '[adzerk.boot-reload    :refer [reload]]
-  '[pandeiro.boot-http    :refer [serve]]
   '[adzerk.bootlaces      :refer :all]
   '[adzerk.boot-test :refer :all])
 

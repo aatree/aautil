@@ -4,7 +4,7 @@ Snippets of useful code
 1. [aalog](#aalog)
 1. [closer](#closer)
 
-...
+---
 
 ## aalog
 
@@ -26,7 +26,7 @@ provides a simple cljc example using hoplon.
 
 **(error msg)** displays an error log message.
 
-...
+---
 
 ## closer
 
@@ -53,3 +53,5 @@ The aautil/closer_test.clj file provides a simple clj test of closer.
 **(close-component this)** closes the traits of a component, 
 reversing the order in which the traits were opened.
 The *this* parameter is the map structure of the component.
+
+---

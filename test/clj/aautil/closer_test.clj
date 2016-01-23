@@ -9,10 +9,10 @@
 (defn close-b [this] (println "  close b"))
 (defn close-c [this] (println "  close c"))
 
-(let [this (open-component {} "a" close-a)
-      this (open-component this "b" close-b)
-      this (open-component this "c" close-c)]
+(let [this (open-trait {} "a" close-a)
+      this (open-trait this "b" close-b)
+      this (open-trait this "c" close-c)]
   (println "first close")
-  (close-components this)
+  (close-component this)
   (println "second close")
-  (close-components this))
+  (close-component this))

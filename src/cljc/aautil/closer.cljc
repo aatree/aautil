@@ -4,7 +4,7 @@
 #?(:clj
    (set! *warn-on-reflection* true))
 
-(defn open-component [this name f]
+(defn open-trait [this name f]
   (log/info (str "opening " name))
   (if-let [fsa (:closer-fsa this)]
     (do
@@ -28,7 +28,7 @@
           (log/warn e (str "exception on close of " name)))))
     (recur this (next fs))))
 
-(defn close-components [this]
+(defn close-component [this]
   (if-let [fsa (:closer-fsa this)]
     (let [fs @fsa]
       (if fs

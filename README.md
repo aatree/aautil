@@ -49,6 +49,7 @@ The aautil/closer_test.clj file provides a simple clj test of closer.
 * *this* - the map structure of the component.
 * *name* - the name of the trait.
 * *f* - the function used to close the trait. Takes a single argument, this.
+* The value returned by open-trait is the revised map structure of the component.
 
 **(close-component this)** closes the traits of a component, 
 reversing the order in which the traits were opened.

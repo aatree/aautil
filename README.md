@@ -4,6 +4,8 @@ Snippets of useful code
 1. [aalog](#aalog)
 1. [closer](#closer)
 
+...
+
 ## aalog
 
 The aautil/aalog.cljc file implements a thin dumb layer over
@@ -23,6 +25,8 @@ provides a simple cljc example using hoplon.
 **(debug msg)** displays a debug log message.
 
 **(error msg)** displays an error log message.
+
+...
 
 ## closer
 

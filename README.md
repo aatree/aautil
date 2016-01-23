@@ -14,7 +14,7 @@ The aautil/aalog_test.clj file provides a simple clj test of aalog,
 while [counters](https://github.com/aatree/aademos/tree/master/counters)
 provides a simple cljc example using hoplon.
 
-### API
+#### API
 
 **(info msg)** displays an info log message.
 
@@ -38,7 +38,7 @@ of the opening order. This is handled by aautil/closer.cljc.
 
 The aautil/closer_test.clj file provides a simple clj test of closer.
 
-### API
+#### API
 
 **(open-trait this name f)** opens a trait.
 

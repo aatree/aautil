@@ -14,8 +14,8 @@ js/console and org.clojure/tools.logging. Easy to use from
 another .cljc file.
 
 The aautil/aalog_test.clj file provides a simple clj test of aalog,
-while [counters](https://github.com/aatree/aademos/tree/master/counters)
-provides a simple cljc example using hoplon.
+while the [counters](https://github.com/aatree/aademos/tree/master/counters)
+demo provides a simple cljc example using hoplon.
 
 #### API
 

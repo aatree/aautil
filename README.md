@@ -41,7 +41,9 @@ Often a trait needs to be closed. And a composition of components
 typically requires that the closes need to be performed in the reverse
 of the opening order. This is handled by aautil/closer.cljc.
 
-The aautil/closer_test.clj file provides a simple clj test of closer.
+The aautil/closer_test.clj file provides a simple clj test of closer,
+while the [closer](https://github.com/aatree/aademos/tree/master/closer)
+demo provides a simple cljc example using hoplon.
 
 #### API
 

@@ -43,15 +43,10 @@
 (defn key-lens
   "Builds a lens using get and assoc"
   [key]
-  {:getter
-   (fn [data] (get data key))
-   :setter
-   (fn [data item] (assoc data key item))})
+  {:getter (fn [data] (get data key))
+   :setter (fn [data item] (assoc data key item))})
 
 ;A lens built using read-string and pr-str.
 (def edn-lens
-  {:getter
-   read-string
-   :setter
-   (fn [_ item]
-     (pr-str item))})
+  {:getter read-string
+   :setter (fn [_ item] (pr-str item))})

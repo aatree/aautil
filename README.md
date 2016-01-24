@@ -141,10 +141,17 @@ different types of data structures.
 Here is the key-lens function we used above for accessing maps:
 
 ```
-(defn key-lens [k]
-  (lens.
-    (fn [d] (get d k))
-    (fn [d v] (assoc d k v))))
+(defn key-lens [key]
+  {:getter (fn [data] (get data key)) 
+   :setter (fn [data item] (assoc data key item))})
+```
+
+And edn-lens is just as simple:
+
+```
+(def edn-lens
+  {:getter read-string
+   :setter (fn [_ item] (pr-str item))})
 ```
 
 ---

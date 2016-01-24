@@ -63,9 +63,72 @@ The *this* parameter is the map structure of the component.
 
 ---
 
-# dewdrop
+## dewdrop
 
-Dewdrop is a very simple implementation of lenses.
+Dewdrop is a very simple implementation of lenses,
+where a lens is a device for operating on a part of a larger structure.
+
+Lets say you have a map and you want to operate on the value of :x.
+You would define the lens like this:
+
+```
+(def x-lens (key-lens :x))
+```
+Here are some sample tests:
+
+```
+(println (lreset! x-lens {} 5))
+;-> {:x 5}
+(println (lderef x-lens {:x 5 :y 6}))
+;-> 5
+(println (lderef x-lens {}))
+;-> nil
+(println (lreset! x-lens nil 5))
+;-> {:x 5}
+(println (lswap! x-lens {:x 5 :y 6}
+                (fn [old] (* 2 old))))
+;-> {:x 10, :y 6}
+```
+Now lets create a second lens for operating on the value of :y in a map:
+
+```
+(def y-lens (key-lens :y))
+```
+But what if the value of :y is found in the map which :x holds?
+We just compose a new lens using the lenses we already have:
+```
+
+(def xy-lens (lcompose x-lens y-lens))
+```
+And here are some more tests:
+
+```
+(println (lreset! xy-lens nil 5))
+;-> {:x {:y 5}
+(println (lderef xy-lens {:x {:y 5 :z 3}}))
+;-> 5
+(println (lswap! xy-lens {:x {:y 5 :z 3}}
+                  (fn [old] (* 2 old))))
+;-> {:x {:y 10, :z 3}}
+```
+
+### Write your own lenses
+
+A dewdrop lens is nothing more than a record with getter and setter functions as values:
+
+```
+(def lens (new-lens getter setter))
+```
+Defining a kind of lens then is very simple, and you can easily define lenses for
+different types of data structures.
+Here is the key-lens function we used above for accessing maps:
+
+```
+(defn key-lens [k]
+  (lens.
+    (fn [d] (get d k))
+    (fn [d v] (assoc d k v))))
+```
 
 ---
 

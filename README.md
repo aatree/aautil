@@ -1,5 +1,5 @@
 # aautil
-Snippets of useful code
+Snippets of useful cljc code
 
 1. [aalog](#aalog)
 1. [closer](#closer)

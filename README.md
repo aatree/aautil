@@ -1,8 +1,8 @@
 # aautil
 Snippets of useful cljc code
 
-1. [aalog](#aalog)
-1. [closer](#closer)
+1. [aalog](#aalog) - A logger that wraps js/console and tools.logging.
+1. [closer](#closer) - Lifecycle for ultra-light components.
 1. [Change Log](#change-log)
 
 ---

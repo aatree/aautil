@@ -1,8 +1,11 @@
 # aautil
 Snippets of useful cljc code
 
+[![Clojars Project](https://img.shields.io/clojars/v/aatree/aautil.svg)](https://clojars.org/aatree/aautil)
+
 1. [aalog](#aalog) - A logger that wraps js/console and tools.logging.
 1. [closer](#closer) - Lifecycle for ultra-light components.
+1. [dewdrop](#dewdrop) - Lenses.
 1. [Change Log](#change-log)
 
 ---
@@ -57,6 +60,12 @@ demo provides a simple cljc example using hoplon.
 **(close-component this)** closes the traits of a component, 
 reversing the order in which the traits were opened.
 The *this* parameter is the map structure of the component.
+
+---
+
+# dewdrop
+
+Dewdrop is a very simple implementation of lenses.
 
 ---
 

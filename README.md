@@ -112,6 +112,19 @@ And here are some more tests:
 ;-> {:x {:y 10, :z 3}}
 ```
 
+Now if your data structure happens to be an EDN string, 
+or happens to contain a string that holds an EDN string,
+then the edn-lens may be quite handy:
+
+```
+(println (lreset! edn-lens nil 5)) ;-> "5"
+(def edn-xy-lens (lcompose edn-lens xy-lens))
+(println (lreset! edn-xy-lens nil 5)) ;-> "{:x {:y 5}}"
+(println (lderef edn-xy-lens "{:x {:y 5 :z 3}}")) ;-> 5
+(println (lswap! edn-xy-lens "{:x {:y 5 :z 3}}"
+                 (fn [old] (* 2 old)))) ;-> "{:x {:y 10, :z 3}}"
+```
+
 ### Write your own lenses
 
 A dewdrop lens is nothing more than a map structure with getter and setter functions as values:

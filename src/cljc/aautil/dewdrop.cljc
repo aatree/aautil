@@ -1,4 +1,9 @@
-(ns aautil.dewdrop)
+(ns aautil.dewdrop
+  #?(:clj (:require [clojure.string :as str]
+                    [clojure.edn :refer [read-string]])
+     :cljs (:require [clojure.string :as str]
+             [cljs.reader :refer [read-string]]))
+  #?(:clj (:refer-clojure :exclude [read-string])))
 
 (defn new-lens
   "Create a new lens."
@@ -36,9 +41,17 @@
        (lreset! this data that-data)))})
 
 (defn key-lens
-  "A lens built using get and assoc"
+  "Builds a lens using get and assoc"
   [key]
   {:getter
    (fn [data] (get data key))
    :setter
    (fn [data item] (assoc data key item))})
+
+;A lens built using read-string and pr-str.
+(def edn-lens
+  {:getter
+   read-string
+   :setter
+   (fn [_ item]
+     (pr-str item))})

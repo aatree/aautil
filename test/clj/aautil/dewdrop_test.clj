@@ -15,3 +15,10 @@
 (println (lderef xy-lens {:x {:y 5 :z 3}})) ;-> 5
 (println (lswap! xy-lens {:x {:y 5 :z 3}}
                   (fn [old] (* 2 old)))) ;-> {:x {:y 10, :z 3}}
+
+(println (lreset! edn-lens nil 5)) ;-> "5"
+(def edn-xy-lens (lcompose edn-lens xy-lens))
+(println (lreset! edn-xy-lens nil 5)) ;-> "{:x {:y 5}}"
+(println (lderef edn-xy-lens "{:x {:y 5 :z 3}}")) ;-> 5
+(println (lswap! edn-xy-lens "{:x {:y 5 :z 3}}"
+                 (fn [old] (* 2 old)))) ;-> "{:x {:y 10, :z 3}}"

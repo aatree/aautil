@@ -9,7 +9,7 @@
                   [adzerk/boot-cljs                          "1.7.228-1" :scope "test"]
                   [crisptrutski/boot-cljs-test               "0.2.1" :scope "test"]]
   :source-paths #{"test/cljs" "test/clj" "dev-resources"}
-  :resource-paths #{"src/clj" "src/cljs" "src/cljc"}
+  :resource-paths #{"src/cljc"}
 )
 
 (require
@@ -18,7 +18,7 @@
   '[adzerk.boot-test            :refer :all]
   '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
-(def +version+ "0.0.1")
+(def +version+ "0.0.2")
 
 (bootlaces! +version+ :dont-modify-paths? true)
 

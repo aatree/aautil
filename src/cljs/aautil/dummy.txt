@@ -1,2 +1,0 @@
-Delete this file when other files are present.
-This is just a place holder for git.

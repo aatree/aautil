@@ -3,7 +3,7 @@
 
 (set! *warn-on-reflection* true)
 
-(close-components {})
+(close-component {})
 
 (defn close-a [this] (println "  close a"))
 (defn close-b [this] (println "  close b"))

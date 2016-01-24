@@ -28,7 +28,7 @@
   "Combine a lens with another."
   [this that]
   {:getter
-   (fn [data] ((:getter this) ((:getter that) data)))
+   (fn [data] ((:getter that) ((:getter this) data)))
    :setter
    (fn [data item]
      (let [this-data (lderef this data)

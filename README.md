@@ -3,6 +3,7 @@ Snippets of useful code
 
 1. [aalog](#aalog)
 1. [closer](#closer)
+1. [Change Log](#change-log)
 
 ---
 
@@ -56,3 +57,9 @@ reversing the order in which the traits were opened.
 The *this* parameter is the map structure of the component.
 
 ---
+
+# Change Log
+
+**0.0.2** - Fixed bugs in closer-test.
+
+**0.0.1** - Initial release

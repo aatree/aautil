@@ -114,10 +114,14 @@ And here are some more tests:
 
 ### Write your own lenses
 
-A dewdrop lens is nothing more than a record with getter and setter functions as values:
+A dewdrop lens is nothing more than a map structure with getter and setter functions as values:
 
 ```
-(def lens (new-lens getter setter))
+(defn new-lens
+  "Create a new lens."
+  [getter setter]
+  {:getter getter :setter setter})
+
 ```
 Defining a kind of lens then is very simple, and you can easily define lenses for
 different types of data structures.

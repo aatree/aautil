@@ -112,6 +112,21 @@ And here are some more tests:
 ;-> {:x {:y 10, :z 3}}
 ```
 
+Sometimes we need a key-lens which allows the value of 
+the key to change. For this we can use key-atom-lens:
+
+```
+(def my-key (atom :w))
+(def my-key-lens (key-atom-lens my-key))
+(println (lreset! my-key-lens {} 5)) ;-> {:w 5}
+(println (lderef my-key-lens {:w 5 :y 6})) ;-> 5
+(println (lderef my-key-lens {})) ;-> nil
+(reset! my-key :n)
+(println (lreset! my-key-lens nil 5)) ;-> {:n 5}
+(println (lswap! my-key-lens {:n 5 :y 6}
+                 (fn [old] (* 2 old)))) ;-> {:n 10, :y 6}
+```
+
 Now if your data structure happens to be an EDN string, 
 or happens to contain a string that holds an EDN string,
 then the edn-lens may be quite handy:
@@ -144,6 +159,15 @@ Here is the key-lens function we used above for accessing maps:
 (defn key-lens [key]
   {:getter (fn [data] (get data key)) 
    :setter (fn [data item] (assoc data key item))})
+```
+
+The key-atom-lens is almost the same:
+
+```
+(defn key-atom-lens
+  [key-atom]
+  {:getter (fn [data] (get data @key-atom))
+   :setter (fn [data item] (assoc data @key-atom item))})
 ```
 
 And edn-lens is just as simple:

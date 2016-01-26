@@ -29,16 +29,16 @@
   (let [old (lderef this data)]
     (lreset! this data (f old))))
 
-(defn lcompose
+(defn lcomp
   "Combine a lens with another."
-  [this that]
+  [right left]
   {:getter
-   (fn [data] ((:getter that) ((:getter this) data)))
+   (fn [data] ((:getter left) ((:getter right) data)))
    :setter
    (fn [data item]
-     (let [this-data (lderef this data)
-           that-data (lreset! that this-data item)]
-       (lreset! this data that-data)))})
+     (let [right-data (lderef right data)
+           left-data (lreset! left right-data item)]
+       (lreset! right data left-data)))})
 
 (defn key-lens
   "Builds a lens using get and assoc"
@@ -56,3 +56,13 @@
 (def edn-lens
   {:getter read-string
    :setter (fn [_ item] (pr-str item))})
+
+(defn printing-lens
+  "A lens for debugging"
+  [id]
+  {:getter (fn [item]
+             (println id :got item)
+             item)
+   :setter (fn [data item]
+             (println id :set data item)
+             item)})

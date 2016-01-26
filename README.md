@@ -98,7 +98,7 @@ But what if the value of :y is found in the map which :x holds?
 We just compose a new lens using the lenses we already have:
 ```
 
-(def xy-lens (lcompose x-lens y-lens))
+(def xy-lens (lcomp x-lens y-lens))
 ```
 And here are some more tests:
 
@@ -133,7 +133,7 @@ then the edn-lens may be quite handy:
 
 ```
 (println (lreset! edn-lens nil 5)) ;-> "5"
-(def edn-xy-lens (lcompose edn-lens xy-lens))
+(def edn-xy-lens (lcomp edn-lens xy-lens))
 (println (lreset! edn-xy-lens nil 5)) ;-> "{:x {:y 5}}"
 (println (lderef edn-xy-lens "{:x {:y 5 :z 3}}")) ;-> 5
 (println (lswap! edn-xy-lens "{:x {:y 5 :z 3}}"

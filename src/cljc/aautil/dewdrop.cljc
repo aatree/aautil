@@ -10,35 +10,54 @@
   [getter setter]
   {:getter getter :setter setter})
 
-(defn lderef
+(defn lget
   "Extract an item from some data.
   Returns the extracted item."
-  [this data]
-  ((:getter this) data))
+  [lens data]
+  ((:getter lens) data))
 
-(defn lreset!
+(defn lderef
+  "Extract an item from data held by an atom.
+  Returns the extracted item."
+  [lens data-atom]
+  (lget lens @data-atom))
+
+(defn lset!
   "Revise some data with an item.
   Returns the revised data."
-  [this data item]
-  ((:setter this) data item))
+  [lens data item]
+  ((:setter lens) data item))
 
-(defn lswap!
+(defn lreset!
+  "Revise some data held by an atom with an item.
+  Returns the revised data."
+  [lens data-atom item]
+  (reset! data-atom (lset! lens @data-atom item)))
+
+(defn lupd!
   "Update an item in some data.
   Returns the revised data."
-  [this data f]
-  (let [old (lderef this data)]
-    (lreset! this data (f old))))
+  [lens data f]
+  (lset! lens data (f (lget lens data))))
+
+(defn lswap!
+  "Update an item in some data held by an atom.
+  Returns the revised data."
+  [lens data-atom f]
+  (swap! data-atom
+         (fn [data]
+           (lupd! lens data f))))
 
 (defn lcomp
   "Combine a lens with another."
-  [right left]
+  [left right]
   {:getter
-   (fn [data] ((:getter left) ((:getter right) data)))
+   (fn [data] (lget left (lget right data)))
    :setter
    (fn [data item]
-     (let [right-data (lderef right data)
-           left-data (lreset! left right-data item)]
-       (lreset! right data left-data)))})
+     (let [right-data (lget right data)
+           left-data (lset! left right-data item)]
+       (lset! right data left-data)))})
 
 (defn key-lens
   "Builds a lens using get and assoc"
@@ -46,7 +65,7 @@
   {:getter (fn [data] (get data key))
    :setter (fn [data item] (assoc data key item))})
 
-(defn key-atom-lens
+(defn atom-key-lens
   "Builds a lens using get and assoc"
   [key-atom]
   {:getter (fn [data] (get data @key-atom))

@@ -77,17 +77,26 @@ You would define the lens like this:
 Here are some sample tests:
 
 ```
-(println (lreset! x-lens {} 5))
+(println (lset! x-lens {} 5))
 ;-> {:x 5}
-(println (lderef x-lens {:x 5 :y 6}))
+(println (lget x-lens {:x 5 :y 6}))
 ;-> 5
-(println (lderef x-lens {}))
+(println (lget x-lens {}))
 ;-> nil
-(println (lreset! x-lens nil 5))
+(println (lset! x-lens nil 5))
 ;-> {:x 5}
-(println (lswap! x-lens {:x 5 :y 6}
+(println (lupd! x-lens {:x 5 :y 6}
                 (fn [old] (* 2 old))))
 ;-> {:x 10, :y 6}
+```
+Dewdrop lenses also work with data structures held by atoms:
+
+```
+(def my-atom (atom {:x 1 :y 2}))
+(println (lderef x-lens my-atom))                           ;-> 1
+(println (lreset! x-lens my-atom 3) @my-atom)               ;-> {:x 3, :y 2} {:x 3, :y 2}
+(println (lswap! x-lens my-atom
+                 (fn [data] (* 2 data))) @my-atom)          ;-> {:x 6, :y 2} {:x 6, :y 2}
 ```
 Now lets create a second lens for operating on the value of :y in a map:
 
@@ -98,16 +107,16 @@ But what if the value of :y is found in the map which :x holds?
 We just compose a new lens using the lenses we already have:
 ```
 
-(def xy-lens (lcomp x-lens y-lens))
+(def xy-lens (lcomp y-lens x-lens))
 ```
 And here are some more tests:
 
 ```
-(println (lreset! xy-lens nil 5))
+(println (lset! xy-lens nil 5))
 ;-> {:x {:y 5}
-(println (lderef xy-lens {:x {:y 5 :z 3}}))
+(println (lget xy-lens {:x {:y 5 :z 3}}))
 ;-> 5
-(println (lswap! xy-lens {:x {:y 5 :z 3}}
+(println (lupd! xy-lens {:x {:y 5 :z 3}}
                   (fn [old] (* 2 old))))
 ;-> {:x {:y 10, :z 3}}
 ```
@@ -118,12 +127,12 @@ the key to change. For this we can use key-atom-lens:
 ```
 (def my-key (atom :w))
 (def my-key-lens (key-atom-lens my-key))
-(println (lreset! my-key-lens {} 5)) ;-> {:w 5}
-(println (lderef my-key-lens {:w 5 :y 6})) ;-> 5
-(println (lderef my-key-lens {})) ;-> nil
+(println (lset! my-key-lens {} 5)) ;-> {:w 5}
+(println (lget my-key-lens {:w 5 :y 6})) ;-> 5
+(println (lget my-key-lens {})) ;-> nil
 (reset! my-key :n)
-(println (lreset! my-key-lens nil 5)) ;-> {:n 5}
-(println (lswap! my-key-lens {:n 5 :y 6}
+(println (lset! my-key-lens nil 5)) ;-> {:n 5}
+(println (lupd! my-key-lens {:n 5 :y 6}
                  (fn [old] (* 2 old)))) ;-> {:n 10, :y 6}
 ```
 
@@ -132,11 +141,11 @@ or happens to contain a string that holds an EDN string,
 then the edn-lens may be quite handy:
 
 ```
-(println (lreset! edn-lens nil 5)) ;-> "5"
-(def edn-xy-lens (lcomp edn-lens xy-lens))
-(println (lreset! edn-xy-lens nil 5)) ;-> "{:x {:y 5}}"
-(println (lderef edn-xy-lens "{:x {:y 5 :z 3}}")) ;-> 5
-(println (lswap! edn-xy-lens "{:x {:y 5 :z 3}}"
+(println (lset! edn-lens nil 5)) ;-> "5"
+(def edn-xy-lens (lcomp xy-lens edn-lens))
+(println (lset! edn-xy-lens nil 5)) ;-> "{:x {:y 5}}"
+(println (lget edn-xy-lens "{:x {:y 5 :z 3}}")) ;-> 5
+(println (lupd! edn-xy-lens "{:x {:y 5 :z 3}}"
                  (fn [old] (* 2 old)))) ;-> "{:x {:y 10, :z 3}}"
 ```
 
@@ -164,7 +173,7 @@ Here is the key-lens function we used above for accessing maps:
 The key-atom-lens is almost the same:
 
 ```
-(defn key-atom-lens
+(defn atom-key-lens
   [key-atom]
   {:getter (fn [data] (get data @key-atom))
    :setter (fn [data item] (assoc data @key-atom item))})

@@ -93,6 +93,25 @@
   IAtom
   (reset [this item] (lreset! lens data-atom item))
   (swap [this f] (lswap! lens data-atom f))
+  (swap [this f arg]
+    (swap! data-atom
+           (fn [data]
+             (lset! lens data (f (lget lens data) arg)))))
+  (swap [this f arg1 arg2]
+    (swap! data-atom
+           (fn [data]
+             (lset! lens data (f (lget lens data) arg1 arg2)))))
+  (swap [this f x y args]
+    (swap! data-atom
+           (fn [data]
+             (lset! lens data (apply f (lget lens data) x y args)))))
+  #_ (^boolean compareAndSet [oldv newv]
+    (swap! data-atom
+           (fn [data]
+             (let [v (lget lens data)]
+               (if (= oldv v)
+                 (lset! lens data newv)
+                 data)))))
   )
 
 (defn lview [lens data-atom]

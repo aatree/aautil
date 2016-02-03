@@ -3,7 +3,8 @@
                     [clojure.edn :refer [read-string]])
      :cljs (:require [clojure.string :as str]
              [cljs.reader :refer [read-string]]))
-  #?(:clj (:refer-clojure :exclude [read-string])))
+  #?(:clj (:refer-clojure :exclude [read-string]))
+  #?(:clj (:import (clojure.lang IDeref IAtom))))
 
 (defn new-lens
   "Create a new lens."
@@ -85,3 +86,14 @@
    :setter (fn [data item]
              (println id :set data item)
              item)})
+
+(defrecord lens-view [lens data-atom]
+  IDeref
+  (deref [this] (lderef lens data-atom))
+  IAtom
+  (reset [this item] (lreset! lens data-atom item))
+  (swap [this f] (lswap! lens data-atom f))
+  )
+
+(defn lview [lens data-atom]
+  (->lens-view lens data-atom))

@@ -10,10 +10,15 @@
                 (fn [old] (* 2 old))))                      ;-> {:x 10, :y 6}
 
 (def my-atom (atom {:x 1 :y 2}))
+(def my-x (lview x-lens my-atom))
 (println (lderef x-lens my-atom))                           ;-> 1
+(println @my-x)                                             ;-> 1
 (println (lreset! x-lens my-atom 3) @my-atom)               ;-> {:x 3, :y 2} {:x 3, :y 2}
+(println (reset! my-x 4) @my-atom)                          ;-> {:x 4, :y 2} {:x 4, :y 2}
 (println (lswap! x-lens my-atom
-                 (fn [data] (* 2 data))) @my-atom)          ;-> {:x 6, :y 2} {:x 6, :y 2}
+                 (fn [data] (* 2 data))) @my-atom)          ;-> {:x 8, :y 2} {:x 8, :y 2}
+(println (swap! my-x
+                (fn [data] (* 2 data))) @my-atom)          ;-> {:x 16, :y 2} {:x 16, :y 2}
 
 (def my-key (atom :w))
 (def my-key-lens (atom-key-lens my-key))

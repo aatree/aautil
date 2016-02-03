@@ -105,7 +105,7 @@
     (swap! data-atom
            (fn [data]
              (lset! lens data (apply f (lget lens data) x y args)))))
-  #_ (^boolean compareAndSet [oldv newv]
+  (^boolean compareAndSet [this oldv newv]
     (swap! data-atom
            (fn [data]
              (let [v (lget lens data)]

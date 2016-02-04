@@ -149,6 +149,18 @@ then the edn-lens may be quite handy:
                  (fn [old] (* 2 old)))) ;-> "{:x {:y 10, :z 3}}"
 ```
 
+### Views
+
+The lens-view in dewdrop is a record created using the lview function,
+which combines a lens with an atom (or hoplon cell):
+
+```
+(defn lview [lens data-atom]
+  (->lens-view lens data-atom))
+```
+
+Functions which work with a lens-view are @, reset! and swap!.
+
 ### Write your own lenses
 
 A dewdrop lens is nothing more than a map structure with getter and setter functions as values:
@@ -190,6 +202,8 @@ And edn-lens is just as simple:
 ---
 
 # Change Log
+
+**0.0.4** - Dewdrop now supports views.
 
 **0.0.3** - Added dewdrop lenses.
 

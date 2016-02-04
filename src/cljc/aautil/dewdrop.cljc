@@ -1,10 +1,13 @@
 (ns aautil.dewdrop
-  #?(:clj (:require [clojure.string :as str]
-                    [clojure.edn :refer [read-string]])
+  #?(:clj
+           (:require [clojure.string :as str]
+                     [clojure.edn :refer [read-string]])
      :cljs (:require [clojure.string :as str]
              [cljs.reader :refer [read-string]]))
-  #?(:clj (:refer-clojure :exclude [read-string]))
-  #?(:clj (:import (clojure.lang IDeref IAtom))))
+  #?(:clj
+     (:refer-clojure :exclude [read-string]))
+  #?(:clj
+     (:import (clojure.lang IDeref IAtom))))
 
 (defn new-lens
   "Create a new lens."
@@ -87,32 +90,56 @@
              (println id :set data item)
              item)})
 
-(defrecord lens-view [lens data-atom]
-  IDeref
-  (deref [this] (lderef lens data-atom))
-  IAtom
-  (reset [this item] (lreset! lens data-atom item))
-  (swap [this f] (lswap! lens data-atom f))
-  (swap [this f arg]
-    (swap! data-atom
-           (fn [data]
-             (lset! lens data (f (lget lens data) arg)))))
-  (swap [this f arg1 arg2]
-    (swap! data-atom
-           (fn [data]
-             (lset! lens data (f (lget lens data) arg1 arg2)))))
-  (swap [this f x y args]
-    (swap! data-atom
-           (fn [data]
-             (lset! lens data (apply f (lget lens data) x y args)))))
-  (^boolean compareAndSet [this oldv newv]
-    (swap! data-atom
-           (fn [data]
-             (let [v (lget lens data)]
-               (if (= oldv v)
-                 (lset! lens data newv)
-                 data)))))
-  )
+#?(:clj
+   (defrecord lens-view [lens data-atom]
+     IDeref
+     (deref [this] (lderef lens data-atom))
+
+     IAtom
+     (reset [this item] (lreset! lens data-atom item))
+     (swap [this f] (lswap! lens data-atom f))
+     (swap [this f arg]
+       (swap! data-atom
+              (fn [data]
+                (lset! lens data (f (lget lens data) arg)))))
+     (swap [this f arg1 arg2]
+       (swap! data-atom
+              (fn [data]
+                (lset! lens data (f (lget lens data) arg1 arg2)))))
+     (swap [this f x y args]
+       (swap! data-atom
+              (fn [data]
+                (lset! lens data (apply f (lget lens data) x y args)))))
+     (^boolean compareAndSet [this oldv newv]
+       (swap! data-atom
+              (fn [data]
+                (let [v (lget lens data)]
+                  (if (= oldv v)
+                    (lset! lens data newv)
+                    data)))))))
+
+#?(:cljs
+   (defrecord lens-view [lens data-atom]
+     cljs.core/IDeref
+     (-deref [this] (lderef lens data-atom))
+
+     cljs.core/IReset
+     (-reset! [this item] (lreset! lens data-atom item))
+
+     cljs.core/ISwap
+     (-swap! [this f] (lswap! lens data-atom f))
+     (-swap! [this f arg]
+       (swap! data-atom
+              (fn [data]
+                (lset! lens data (f (lget lens data) arg)))))
+     (-swap! [this f arg1 arg2]
+       (swap! data-atom
+              (fn [data]
+                (lset! lens data (f (lget lens data) arg1 arg2)))))
+     (-swap! [this f x y args]
+       (swap! data-atom
+              (fn [data]
+                (lset! lens data (apply f (lget lens data) x y args)))))))
 
 (defn lview [lens data-atom]
   (->lens-view lens data-atom))

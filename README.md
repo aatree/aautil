@@ -218,6 +218,8 @@ demo provides a simple cljc example using hoplon, as well as unit tests.
 
 **(set-byte! ba i v)** Sets byte i in array ba to v.
 
+**(get-byte ba i)** Returns the ith byte of the byte array.
+
 **(bytes-equal ba1 ba2)** Returns true only if the two byte arrays are equal.
 
 **(vec-bytes ba)** Returns a vector of bytes.

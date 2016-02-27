@@ -209,7 +209,7 @@ The aautil/bytes.cljc file implements a thin dumb layer over
 various clojure and clojurescript functions. Easy to use from
 another .cljc file.
 
-The [bytes](https://github.com/aatree/aademos/tree/master/bytes)
+The [byte-array](https://github.com/aatree/aademos/tree/master/byte-array)
 demo provides a simple cljc example using hoplon, as well as unit tests.
 
 #### API

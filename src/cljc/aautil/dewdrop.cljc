@@ -9,6 +9,9 @@
   #?(:clj
      (:import (clojure.lang IDeref IAtom))))
 
+#?(:clj
+   (set! *warn-on-reflection* true))
+
 (defn new-lens
   "Create a new lens."
   [getter setter]

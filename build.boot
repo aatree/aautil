@@ -18,7 +18,7 @@
   '[adzerk.boot-test            :refer :all]
   '[crisptrutski.boot-cljs-test :refer [test-cljs]])
 
-(def +version+ "0.0.4")
+(def +version+ "0.0.5")
 
 (bootlaces! +version+ :dont-modify-paths? true)
 

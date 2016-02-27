@@ -6,7 +6,9 @@ Snippets of useful cljc code
 1. [aalog](#aalog) - A logger that wraps js/console and tools.logging.
 1. [closer](#closer) - Lifecycle for ultra-light components.
 1. [dewdrop](#dewdrop) - Lenses.
-1. [Change Log](#change-log)
+1. [bytes](#bytes) - Byte arrays.
+
+[Change Log](#change-log)
 
 ---
 
@@ -149,7 +151,7 @@ then the edn-lens may be quite handy:
                  (fn [old] (* 2 old)))) ;-> "{:x {:y 10, :z 3}}"
 ```
 
-### Views
+#### Views
 
 The lens-view in dewdrop is a record created using the lview function,
 which combines a lens with an atom (or hoplon cell):
@@ -161,7 +163,7 @@ which combines a lens with an atom (or hoplon cell):
 
 Functions which work with a lens-view are @, reset! and swap!.
 
-### Write your own lenses
+#### Write your own lenses
 
 A dewdrop lens is nothing more than a map structure with getter and setter functions as values:
 
@@ -201,7 +203,30 @@ And edn-lens is just as simple:
 
 ---
 
+## bytes
+
+The aautil/bytes.cljc file implements a thin dumb layer over
+various clojure and clojurescript functions. Easy to use from
+another .cljc file.
+
+The [bytes](https://github.com/aatree/aademos/tree/master/bytes)
+demo provides a simple cljc example using hoplon, as well as unit tests.
+
+#### API
+
+**(make-bytes s)** Returns a byte array of size s.
+
+**(set-byte! ba i v)** Sets byte i in array ba to v.
+
+**(bytes-equal ba1 ba2)** Returns true only if the two byte arrays are equal.
+
+**(vec-bytes ba)** Returns a vector of bytes.
+
+---
+
 # Change Log
+
+**0.0.5** - Accessing byte arrays.
 
 **0.0.4** - Dewdrop now supports views.
 

@@ -7,6 +7,7 @@ Snippets of useful cljc code
 1. [closer](#closer) - Lifecycle for ultra-light components.
 1. [dewdrop](#dewdrop) - Lenses.
 1. [bytes](#bytes) - Byte arrays.
+1. [cs235](#cs256) - A 256-bit checksum.
 
 [Change Log](#change-log)
 
@@ -210,7 +211,7 @@ various clojure and clojurescript functions. Easy to use from
 another .cljc file.
 
 The [byte-array](https://github.com/aatree/aademos/tree/master/byte-array)
-demo provides a simple cljc example using hoplon, as well as unit tests.
+demo provides a simple cljc example, as well as unit tests.
 
 #### API
 
@@ -226,7 +227,27 @@ demo provides a simple cljc example using hoplon, as well as unit tests.
 
 ---
 
+## cs256
+
+The aautil/cs256.cljc file uses the aautil.bytes namespace to implement
+a 256-bit checksum.
+
+The [checksum](https://github.com/aatree/aademos/tree/master/checksum)
+demo provides a simple cljc example, as well as unit tests.
+
+#### API
+
+**(make-cs256)** Returns a new 256-bit checksum.
+
+**(cs256-equal cs1 cs2)** Returns true only if the two checksums are equal.
+
+**(digest! cs ba)** updates the checksum using the provided byte array.
+
+---
+
 # Change Log
+
+**0.0.6** - 256-bit checksum.
 
 **0.0.5** - Accessing byte arrays.
 

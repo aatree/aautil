@@ -7,7 +7,7 @@ Snippets of useful cljc code
 1. [closer](#closer) - Lifecycle for ultra-light components.
 1. [dewdrop](#dewdrop) - Lenses.
 1. [bytes](#bytes) - Byte arrays.
-1. [cs235](#cs256) - A 256-bit checksum.
+1. [cs256](#cs256) - A 256-bit checksum.
 
 [Change Log](#change-log)
 

@@ -241,7 +241,10 @@ demo provides a simple cljc example, as well as unit tests.
 
 **(cs256-equal cs1 cs2)** Returns true only if the two checksums are equal.
 
-**(digest! cs ba)** updates the checksum using the provided byte array.
+**(digest! cs ba)** Updates the checksum using the provided byte array.
+
+**cs256-spec** An [Octet](https://github.com/funcool/octet)
+spec for checksums.
 
 ---
 

@@ -247,6 +247,8 @@ demo provides a simple cljc example, as well as unit tests.
 
 # Change Log
 
+**0.0.7** - checksum spec for octet
+
 **0.0.6** - 256-bit checksum.
 
 **0.0.5** - Accessing byte arrays.

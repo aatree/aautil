@@ -1,5 +1,6 @@
 (ns aautil.cs256
-  (:require [aautil.bytes :as bytes]))
+  (:require [aautil.bytes :as bytes]
+            [octet.core :as buf]))
 
 (defn make-cs256 []
   (bytes/make-bytes 33))
@@ -31,3 +32,5 @@
    (when (< i (alength ba))
      (digest-byte! cs (getu ba i))
      (recur cs ba (inc i)))))
+
+(def cs256-spec (buf/bytes 33))

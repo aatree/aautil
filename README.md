@@ -8,6 +8,7 @@ Snippets of useful cljc code
 1. [dewdrop](#dewdrop) - Lenses.
 1. [bytes](#bytes) - Byte arrays.
 1. [cs256](#cs256) - A 256-bit checksum.
+1. [buffer](#buffer) - Extends octet with missing nio.ByteBuffer capabilities.
 
 [Change Log](#change-log)
 
@@ -245,6 +246,19 @@ demo provides a simple cljc example, as well as unit tests.
 
 **cs256-spec** An [Octet](https://github.com/funcool/octet)
 spec for checksums.
+
+## buffer
+
+Buffer builds on the [funcool/octet](https://github.com/funcool/octet)
+project, adding a number of capabilities from 
+[java.nio.bytebuffer](http://docs.oracle.com/javase/8/docs/api/index.html)
+while supporting the extensible specs from octet.
+
+The [buffers](https://github.com/aatree/aademos/tree/master/buffers)
+demo provides a simple cljc example, as well as unit tests.
+
+#### API
+
 
 ---
 

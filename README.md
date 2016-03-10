@@ -250,6 +250,8 @@ spec for checksums.
 
 # Change Log
 
+**0.0.8** - Extends octet with missing nio.ByteBuffer capabilities.
+
 **0.0.7** - checksum spec for octet
 
 **0.0.6** - 256-bit checksum.

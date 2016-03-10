@@ -30,10 +30,8 @@
   (-reset! [this])
   (-rewind! [this])
   (-slice [this])
-  (-write!
-    [this data spec])
-  (-write-at!
-    [this data spec offset]))
+  (-write! [this data spec])
+  (-write-at! [this data spec offset]))
 
 (declare ->aabuf)
 

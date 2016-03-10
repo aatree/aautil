@@ -254,11 +254,53 @@ project, adding a number of capabilities from
 [java.nio.bytebuffer](http://docs.oracle.com/javase/8/docs/api/index.html)
 while supporting the extensible specs from octet.
 
+Type specs supported by octet can be found 
+[here](http://funcool.github.io/octet/latest/#_supported_typespecs).
+
 The [buffers](https://github.com/aatree/aademos/tree/master/buffers)
 demo provides a simple cljc example, as well as unit tests.
 
 #### API
 
+The aabuffer protocol is implemented to work the same for both clojure and clojurescript,
+thought the clojure implementation is little more than a redirect to the ByteBuffer methods.
+The exceptions are the read and write functions, which make use of octet specs.
+
+```
+(defprotocol aabuffer
+  (-array [this])
+  (-array-offset [this])
+  (-as-read-only-buffer [this])
+  (-capacity [this])
+  (-clear! [this])
+  (-duplicate [this])
+  (-flip! [this])
+  (-limit [this])
+  (-limit! [this nl])
+  (-mark! [this])
+  (-position [this])
+  (-position! [this np])
+  (-read! [this spec])
+  (-read-at [this spec offset])
+  (-read-only? [this])
+  (-remaining [this])
+  (-remaining? [this])
+  (-reset! [this])
+  (-rewind! [this])
+  (-slice [this])
+  (-write! [this data spec])
+  (-write-at! [this data spec offset]))
+```
+
+**(newBuffer 42)** Returns a byte buffer based on an array of size 42.
+
+**(wrap array)** Returns a byte buffer built on the provided array.
+
+**(wrap array offset length)** Returns a byte buffer built on the provided
+array with position set to the offset and the limit set to the length.
+
+**(data-size octet.core/int32)** Returns a size of 4. This function works
+for all specs, i.e. for both fixed size and dynamic specs.
 
 ---
 
